@@ -12,7 +12,8 @@ namespace Domain.Tests
             // Arrange
             var measurements = Measurement.ParseMeasurements(XDocument.Load("Data.xml"));
             var aggregator = new MeasurementAggregator(measurements);
-            var grouper = new SizeGrouper(2);
+            const int GROUP_SIZE = 2;
+            var grouper = new SizeGrouper(GROUP_SIZE);
             var calculator = new AveragingCalculator();
 
             // Act
