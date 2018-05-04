@@ -8,7 +8,7 @@ namespace MeasureIt
     {
         public IEnumerable<Measurement> LoadAndAggregateData()
         {
-            var list = new List<Measurement>();
+            var measurements = new List<Measurement>();
             var document = XDocument.Load("Data.xml");
 
             foreach (var element in document.Element("Measurements").Elements())
@@ -20,10 +20,10 @@ namespace MeasureIt
                     HighValue = highValue,
                     LowValue = lowValue,
                 };
-                list.Add(measurement);
+                measurements.Add(measurement);
             }
 
-            var aggregator = new MeasurementAggregator(list);
+            var aggregator = new MeasurementAggregator(measurements);
             var grouper = new SizeGrouper(2);
             var calculator = new AveragingCalculator();
             var result = aggregator.Aggregate(grouper, calculator);
