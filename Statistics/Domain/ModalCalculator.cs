@@ -18,7 +18,6 @@ namespace Domain.Tests
         private double CalculateMode(IEnumerable<Measurement> measurements,
             Func<Measurement,double> keySelector)
         {
-            double value = double.NaN;
             var valueQuery = measurements.GroupBy(keySelector)
                 .OrderByDescending(g => g.Count())
                 .Select(g => new
@@ -28,6 +27,8 @@ namespace Domain.Tests
                 });
             var valueOne = valueQuery.FirstOrDefault();
             var valueTwo = valueQuery.Skip(1).FirstOrDefault();
+
+            double value = double.NaN;
             if (valueOne == null)
             {
                 value = double.NaN;
@@ -44,6 +45,7 @@ namespace Domain.Tests
             {
                 value = valueOne.Value;
             }
+
             return value;
         }
     }
