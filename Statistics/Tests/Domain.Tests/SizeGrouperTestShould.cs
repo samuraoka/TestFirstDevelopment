@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Domain.Tests
 {
-    public class SizeGrouperShould
+    public class SizeGrouperTestShould
     {
         [Theory]
         [InlineData(0)]
