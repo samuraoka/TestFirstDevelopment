@@ -9,7 +9,7 @@ namespace MeasureIt
             try
             {
                 var proc = new Processor();
-                var data = proc.LoadData();
+                var data = proc.LoadAndAggregateData();
                 foreach (var d in data)
                 {
                     Console.WriteLine($"{d.LowValue}:{d.HighValue}");

@@ -1,5 +1,4 @@
 ﻿using Domain;
-using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
 
@@ -7,7 +6,7 @@ namespace MeasureIt
 {
     class Processor
     {
-        public IEnumerable<Measurement> LoadData()
+        public IEnumerable<Measurement> LoadAndAggregateData()
         {
             var list = new List<Measurement>();
             var document = XDocument.Load("Data.xml");
