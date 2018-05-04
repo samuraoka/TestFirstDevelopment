@@ -6,7 +6,20 @@ namespace MeasureIt
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            try
+            {
+                var proc = new Processor();
+                var data = proc.LoadData();
+                foreach (var d in data)
+                {
+                    Console.WriteLine($"{d.LowValue}:{d.HighValue}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
         }
     }
 }

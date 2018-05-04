@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Domain
 {
-    public class AveragingCalculator
+    public class AveragingCalculator : IAggregateCalculator
     {
         public Measurement Aggregate(IEnumerable<Measurement> measurements)
         {

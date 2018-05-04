@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Domain.Tests
 {
-    public class ModalCalculator
+    public class ModalCalculator : IAggregateCalculator
     {
         public Measurement Aggregate(IEnumerable<Measurement> measurements)
         {
