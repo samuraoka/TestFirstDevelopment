@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 
 namespace MeasureIt
 {
@@ -9,7 +10,7 @@ namespace MeasureIt
             try
             {
                 var proc = new Processor();
-                var data = proc.LoadAndAggregateData();
+                var data = proc.LoadAndAggregateData(XDocument.Load("Data.xml"));
                 foreach (var d in data)
                 {
                     Console.WriteLine($"{d.LowValue}:{d.HighValue}");

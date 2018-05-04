@@ -6,10 +6,9 @@ namespace MeasureIt
 {
     class Processor
     {
-        public IEnumerable<Measurement> LoadAndAggregateData()
+        public IEnumerable<Measurement> LoadAndAggregateData(XDocument document)
         {
             var measurements = new List<Measurement>();
-            var document = XDocument.Load("Data.xml");
 
             foreach (var element in document.Element("Measurements").Elements())
             {
