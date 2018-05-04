@@ -10,19 +10,8 @@ namespace Domain.Tests
         public void AggregateData()
         {
             // Arrange
-            var list = new List<Measurement>();
-            var document = XDocument.Load("Data.xml");
-
-            foreach (var element in document.Element("Measurements").Elements())
-            {
-                var highValue = (double)element.Attribute("High");
-                var lowValue = (double)element.Attribute("Low");
-                var measurement = new Measurement();
-                measurement.HighValue = highValue;
-                measurement.LowValue = lowValue;
-                list.Add(measurement);
-            }
-            var aggregator = new MeasurementAggregator(list);
+            var measurements = Measurement.ParseMeasurements(XDocument.Load("Data.xml"));
+            var aggregator = new MeasurementAggregator(measurements);
             var grouper = new SizeGrouper(2);
             var calculator = new AveragingCalculator();
 

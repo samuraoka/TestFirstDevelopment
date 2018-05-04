@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace Domain
 {
@@ -26,5 +28,25 @@ namespace Domain
             hashCode = hashCode * -1521134295 + LowValue.GetHashCode();
             return hashCode;
         }
+
+        public static List<Measurement> ParseMeasurements(XDocument document)
+        {
+            var measurements = new List<Measurement>();
+
+            foreach (var element in document.Element("Measurements").Elements())
+            {
+                var highValue = (double)element.Attribute("High");
+                var lowValue = (double)element.Attribute("Low");
+                var measurement = new Measurement
+                {
+                    HighValue = highValue,
+                    LowValue = lowValue,
+                };
+                measurements.Add(measurement);
+            }
+
+            return measurements;
+        }
+
     }
 }
