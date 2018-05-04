@@ -8,6 +8,21 @@ namespace MeasureIt
     {
         public IEnumerable<Measurement> LoadAndAggregateData(XDocument document)
         {
+            List<Measurement> measurements = ParseMeasurements(document);
+            return AggregateMeasurements(measurements);
+        }
+
+        private IEnumerable<Measurement> AggregateMeasurements(List<Measurement> measurements)
+        {
+            var aggregator = new MeasurementAggregator(measurements);
+            var grouper = new SizeGrouper(2);
+            var calculator = new AveragingCalculator();
+            var result = aggregator.Aggregate(grouper, calculator);
+            return result;
+        }
+
+        private List<Measurement> ParseMeasurements(XDocument document)
+        {
             var measurements = new List<Measurement>();
 
             foreach (var element in document.Element("Measurements").Elements())
@@ -22,11 +37,7 @@ namespace MeasureIt
                 measurements.Add(measurement);
             }
 
-            var aggregator = new MeasurementAggregator(measurements);
-            var grouper = new SizeGrouper(2);
-            var calculator = new AveragingCalculator();
-            var result = aggregator.Aggregate(grouper, calculator);
-            return result;
+            return measurements;
         }
     }
 }
