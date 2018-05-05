@@ -13,11 +13,14 @@ namespace Domain.Tests
             var measurements = Measurement.ParseMeasurements(XDocument.Load("Data.xml"));
             var aggregator = new MeasurementAggregator(measurements);
             const int GROUP_SIZE = 2;
-            var grouper = new SizeGrouper(GROUP_SIZE);
-            var calculator = new AveragingCalculator();
+            var setting = new AggregationSettings
+            {
+                Grouper = new SizeGrouper(GROUP_SIZE),
+                Calculator = new AveragingCalculator(),
+            };
 
             // Act
-            var actual = aggregator.Aggregate(grouper, calculator);
+            var actual = aggregator.Aggregate(setting);
 
             // Assert
             var expected = new List<Measurement>

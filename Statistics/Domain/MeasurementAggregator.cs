@@ -11,14 +11,19 @@ namespace Domain
             _measurements = measurements;
         }
 
-        public IEnumerable<Measurement> Aggregate(IGrouper grouper,
-            IAggregateCalculator calculator)
+        public IEnumerable<Measurement> Aggregate(AggregationSettings setting)
         {
-            var partitions = grouper.Group(_measurements);
+            var partitions = setting.Grouper.Group(_measurements);
             foreach (var partition in partitions)
             {
-                yield return calculator.Aggregate(partition);
+                yield return setting.Calculator.Aggregate(partition);
             }
         }
+    }
+
+    public class AggregationSettings
+    {
+        public IGrouper Grouper { get; set; }
+        public IAggregateCalculator Calculator { get; set; }
     }
 }

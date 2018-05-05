@@ -10,9 +10,12 @@ namespace MeasureIt
         protected override IEnumerable<Measurement> AggregateMeasurements(List<Measurement> measurements)
         {
             var aggregator = new MeasurementAggregator(measurements);
-            var grouper = new SizeGrouper(GROUP_SIZE);
-            var calculator = new AveragingCalculator();
-            var result = aggregator.Aggregate(grouper, calculator);
+            var setting = new AggregationSettings
+            {
+                Grouper = new SizeGrouper(GROUP_SIZE),
+                Calculator = new AveragingCalculator(),
+            };
+            var result = aggregator.Aggregate(setting);
             return result;
         }
     }
