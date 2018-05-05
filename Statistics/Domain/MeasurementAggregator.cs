@@ -11,7 +11,6 @@ namespace Domain
             _measurements = measurements;
         }
 
-        // TODO write unit tests for this method.
         public IEnumerable<Measurement> Aggregate(IGrouper grouper,
             IAggregateCalculator calculator)
         {
